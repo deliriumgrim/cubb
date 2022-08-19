@@ -189,8 +189,8 @@ void	write_dir_info(t_cub3d *this)
 
 void write_info(t_cub3d *this)
 {
-	this->raycast->posX = this->gameinfo->x_pos;
-	this->raycast->posY = this->gameinfo->y_pos;
+	this->raycast->posX = this->gameinfo->x_pos + 0.5;
+	this->raycast->posY = this->gameinfo->y_pos + 0.5;
 	this->raycast->width = 640;
 	this->raycast->height = 480;
 	write_dir_info(this);

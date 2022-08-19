@@ -71,6 +71,7 @@ void ft_walk_d(t_cub3d *this, int keycode)
 
 int	player_control(int keycode, t_cub3d *this)
 {
+//	printf("1 posX %f posxY %f\n", this->raycast->posX, this->raycast->posY);
 	if (keycode == 97)
 		ft_walk_a(this, keycode);
 	if (keycode == 65361)
@@ -83,5 +84,8 @@ int	player_control(int keycode, t_cub3d *this)
 		ft_walk_s(this, keycode);
 	if (keycode == 100)
 		ft_walk_d(this, keycode);
+//	printf("plane X %f dirX %f plane Y %f dirY %f\n", this->raycast->planeX, this->raycast->dirX, this->raycast->planeX, this->raycast->dirX);
+//	printf("2 posX %f posxY %f\n", this->raycast->posX, this->raycast->posY);
+//	printf("\n");
 	return (0);
 }
