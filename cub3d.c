@@ -159,10 +159,10 @@ void	write_dir_info(t_cub3d *this)
 {
 	if (this->gameinfo->dir_player == 1)
 	{
-		this->raycast->dirX = 0;
-		this->raycast->dirY = 1;
-		this->raycast->planeX = 0.66;
-		this->raycast->planeY = 0;
+		this->raycast->dirX = 0.01;
+		this->raycast->dirY = 0.999;
+		this->raycast->planeX = 0.659;
+		this->raycast->planeY = -0.006;
 	}
 	else if (this->gameinfo->dir_player == 2)
 	{
@@ -173,17 +173,17 @@ void	write_dir_info(t_cub3d *this)
 	}
 	else if (this->gameinfo->dir_player == 3)
 	{
-		this->raycast->dirX = 0;
-		this->raycast->dirY = -1;
-		this->raycast->planeX = -0.66;
-		this->raycast->planeY = 0;
+		this->raycast->dirX = -0.01;
+		this->raycast->dirY = -0.999;
+		this->raycast->planeX = -0.659;
+		this->raycast->planeY = 0.006;
 	}
 	else if (this->gameinfo->dir_player == 4)
 	{
-		this->raycast->dirX = -1;
-		this->raycast->dirY = 0;
-		this->raycast->planeX = 0;
-		this->raycast->planeY = 0.66;
+		this->raycast->dirX = -0.999;
+		this->raycast->dirY = 0.01;
+		this->raycast->planeX = 0.006;
+		this->raycast->planeY = 0.659;
 	}
 }
 

@@ -16,6 +16,7 @@ void	ft_look_right(t_cub3d *this, int keycode)
 							- this->raycast->planeY * sin(this->raycast->rotSpeed);
 	this->raycast->planeY = oldPlaneX * sin(this->raycast->rotSpeed)
 							+ this->raycast->planeY * cos(this->raycast->rotSpeed);
+	printf("planeX - %f planeY - %f \n dirX - %f dirY - %f\n\n", this->raycast->planeX, this->raycast->planeY, this->raycast->dirX, this->raycast->dirY);
 }
 
 void	ft_walk_w(t_cub3d *this, int keycode)
@@ -49,6 +50,7 @@ void	ft_look_left(t_cub3d *this, int keycode)
 			- this->raycast->planeY * sin(-this->raycast->rotSpeed);
 	this->raycast->planeY = oldPlaneX * sin(-this->raycast->rotSpeed)
 			+ this->raycast->planeY * cos(-this->raycast->rotSpeed);
+	printf("planeX - %f planeY - %f \n dirX - %f dirY - %f\n\n", this->raycast->planeX, this->raycast->planeY, this->raycast->dirX, this->raycast->dirY);
 }
 
 void ft_walk_a(t_cub3d *this, int keycode)
@@ -71,21 +73,19 @@ void ft_walk_d(t_cub3d *this, int keycode)
 
 int	player_control(int keycode, t_cub3d *this)
 {
-//	printf("1 posX %f posxY %f\n", this->raycast->posX, this->raycast->posY);
-	if (keycode == 97)
+	if (keycode == 0)
 		ft_walk_a(this, keycode);
-	if (keycode == 65361)
+	if (keycode == 123)
 		ft_look_right(this, keycode);
-	if (keycode == 65363)
+	if (keycode == 124)
 		ft_look_left(this, keycode);
-	if (keycode == 119)
+	if (keycode == 13)
 		ft_walk_w(this, keycode);
-	if (keycode == 115)
+	if (keycode == 1)
 		ft_walk_s(this, keycode);
-	if (keycode == 100)
+	if (keycode == 2)
 		ft_walk_d(this, keycode);
-//	printf("plane X %f dirX %f plane Y %f dirY %f\n", this->raycast->planeX, this->raycast->dirX, this->raycast->planeX, this->raycast->dirX);
-//	printf("2 posX %f posxY %f\n", this->raycast->posX, this->raycast->posY);
-//	printf("\n");
+	if(keycode == 53)
+		exit(0);
 	return (0);
 }
