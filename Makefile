@@ -29,7 +29,7 @@ LIB_PATH = libs/libft/
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -g3 -O2 -fsanitize=address
+CFLAGS = -Wall -Wextra -g3 -O2
 
 MLX		=	-L libs/mlx -lmlx -framework OpenGL -framework AppKit
 

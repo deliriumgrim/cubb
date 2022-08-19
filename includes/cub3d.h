@@ -36,6 +36,6 @@ void	check_filename(char *filename);
 void	ft_realloc(char **str, char *new_str);
 int		ft_isspace(char c);
 void	ft_freex2arr(char **arr);
-void	ft_exit(t_cub3d *this);
+int		ft_exit(t_cub3d *this);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 #endif

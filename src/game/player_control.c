@@ -16,7 +16,6 @@ void	ft_look_right(t_cub3d *this, int keycode)
 							- this->raycast->planeY * sin(this->raycast->rotSpeed);
 	this->raycast->planeY = oldPlaneX * sin(this->raycast->rotSpeed)
 							+ this->raycast->planeY * cos(this->raycast->rotSpeed);
-	printf("planeX - %f planeY - %f \n dirX - %f dirY - %f\n\n", this->raycast->planeX, this->raycast->planeY, this->raycast->dirX, this->raycast->dirY);
 }
 
 void	ft_walk_w(t_cub3d *this, int keycode)
@@ -50,7 +49,6 @@ void	ft_look_left(t_cub3d *this, int keycode)
 			- this->raycast->planeY * sin(-this->raycast->rotSpeed);
 	this->raycast->planeY = oldPlaneX * sin(-this->raycast->rotSpeed)
 			+ this->raycast->planeY * cos(-this->raycast->rotSpeed);
-	printf("planeX - %f planeY - %f \n dirX - %f dirY - %f\n\n", this->raycast->planeX, this->raycast->planeY, this->raycast->dirX, this->raycast->dirY);
 }
 
 void ft_walk_a(t_cub3d *this, int keycode)
@@ -86,6 +84,6 @@ int	player_control(int keycode, t_cub3d *this)
 	if (keycode == 2)
 		ft_walk_d(this, keycode);
 	if(keycode == 53)
-		exit(0);
+		ft_exit(this);
 	return (0);
 }

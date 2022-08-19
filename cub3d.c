@@ -237,6 +237,7 @@ int main(int argc, char **argv)
 	write_info(&this);
 	put_floor_celling(&this);
 	mlx_hook(this.mlx_info->mlx_win, 2, 1L << 0, &player_control, &this);
+	mlx_hook(this.mlx_info->mlx_win, 17, 0, ft_exit, &this);
 	mlx_loop_hook(this.mlx_info->mlx, &loop, &this);
 	mlx_loop(this.mlx_info->mlx);
 	ft_exit(&this);

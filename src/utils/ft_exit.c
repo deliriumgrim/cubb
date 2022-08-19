@@ -34,7 +34,9 @@ void ft_exit_utils(t_cub3d *this)
 	free(this->mlx_info);
 }
 
-void	ft_exit(t_cub3d *this)
+
+
+int	ft_exit(t_cub3d *this)
 {
 	if (this)
 	{
@@ -45,4 +47,5 @@ void	ft_exit(t_cub3d *this)
 		ft_exit_utils(this);
 	}
 	exit(0);
+	return (0);
 }
