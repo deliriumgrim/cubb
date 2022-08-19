@@ -87,7 +87,10 @@ int raycast(t_cub3d *this)
 				this->raycast->side = 1;
 			}
 			if (this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != '0'
-			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'N')
+			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'N'
+			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'W'
+			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'E'
+			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'S')
 				this->raycast->hit = 1;
 		}
 		if (this->raycast->side == 0)
