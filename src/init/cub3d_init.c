@@ -12,23 +12,11 @@
 
 #include "../../includes/cub3d.h"
 
-void	ray_init(t_cub3d *this)
+void	ray_init_help(t_cub3d *this)
 {
-	int	y;
 	int	x;
+	int	y;
 
-	y = 0;
-	while (y < 480)
-	{
-		x = 0;
-		while (x < 640)
-		{
-			this->raycast->buff[y][x] = 0;
-			x++;
-		}
-		y++;
-	}
-	this->raycast->texture = (int **)malloc(sizeof(int *) * 4);
 	x = 0;
 	while (x < 4)
 	{
@@ -46,6 +34,26 @@ void	ray_init(t_cub3d *this)
 		}
 		y++;
 	}
+}
+
+void	ray_init(t_cub3d *this)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < 480)
+	{
+		x = 0;
+		while (x < 640)
+		{
+			this->raycast->buff[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	this->raycast->texture = (int **)malloc(sizeof(int *) * 4);
+	ray_init_help(this);
 }
 
 void	cub3d_init(t_cub3d *this)

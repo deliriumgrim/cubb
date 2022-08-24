@@ -31,7 +31,13 @@ void	write_params(t_cub3d *this);
 void	init_mlx(t_cub3d *this);
 
 /*game*/
-void	clear_map(t_cub3d *this);
+int		raycast(t_cub3d *this);
+void	fourth_cond_raycast(t_cub3d *this);
+void	fifth_cond_raycast(t_cub3d *this);
+void	sixth_cond_raycast(t_cub3d *this, int *y);
+void	seventh_cond_raycast(t_cub3d *this, int *y, int *x);
+void	draw(t_cub3d *this);
+void	put_floor_celling(t_cub3d *this);
 void	ft_walk_a(t_cub3d *this, int keycode);
 void	ft_walk_w(t_cub3d *this, int keycode);
 void	ft_walk_s(t_cub3d *this, int keycode);
@@ -41,6 +47,8 @@ int		player_control(int keycode, t_cub3d *this);
 /*validation*/
 void	map_valid(t_cub3d *this);
 void	params_valid(t_cub3d *this);
+size_t	search_max_len(char **map);
+void	set_newline(char **map, size_t max_len);
 
 /*utils*/
 void	ft_error(t_cub3d *this, char *message);

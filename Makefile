@@ -1,6 +1,6 @@
-NAME 	=	cub3d
+NAME 	=	cub3D
 
-NAME_LIN=	cubd3d_lin
+NAME_LIN=	cubd3D_lin
 
 CFILES	=	cub3d.c \
 			src/init/cub3d_init.c \
@@ -8,10 +8,13 @@ CFILES	=	cub3d.c \
 			src/init/write_params.c \
 			src/init/init_mlx.c \
 			src/validation/map_valid.c \
+			src/validation/map_valid_norm.c \
 			src/validation/params_valid.c\
 			src/game/draw_map.c\
 			src/game/ft_walk.c\
 			src/game/player_control.c\
+			src/game/raycast.c\
+			src/game/raycast_norm.c\
 			src/utils/check_filename.c \
 			src/utils/ft_error.c \
 			src/utils/ft_realloc.c \

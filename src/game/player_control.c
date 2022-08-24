@@ -31,36 +31,6 @@ void	ft_look_right(t_cub3d *this, int keycode)
 	+ this->raycast->plane_y * cos(this->raycast->rot_speed);
 }
 
-void	ft_walk_w(t_cub3d *this, int keycode)
-{
-	(void)keycode;
-	if (this->gameinfo->map[(int)this->raycast->pos_y] \
-	[(int)(this->raycast->pos_x \
-	+ this->raycast->dir_x * this->raycast->move_speed)] != '1')
-		this->raycast->pos_x \
-		+= this->raycast->dir_x * this->raycast->move_speed;
-	if (this->gameinfo->map[(int)(this->raycast->pos_y \
-	+ this->raycast->dir_y \
-	* this->raycast->move_speed)][(int)this->raycast->pos_x] != '1')
-		this->raycast->pos_y \
-		+= this->raycast->dir_y * this->raycast->move_speed;
-}
-
-void	ft_walk_s(t_cub3d *this, int keycode)
-{
-	(void)keycode;
-	if (this->gameinfo->map[(int)this->raycast->pos_y] \
-	[(int)(this->raycast->pos_x \
-	- this->raycast->dir_x * this->raycast->move_speed)] != '1')
-		this->raycast->pos_x \
-		-= this->raycast->dir_x * this->raycast->move_speed;
-	if (this->gameinfo->map[(int)(this->raycast->pos_y \
-	- this->raycast->dir_y * this->raycast->move_speed)] \
-	[(int)this->raycast->pos_x] != '1')
-		this->raycast->pos_y \
-		-= this->raycast->dir_y * this->raycast->move_speed;
-}
-
 void	ft_look_left(t_cub3d *this, int keycode)
 {
 	double	old_dir_x;
@@ -82,51 +52,21 @@ void	ft_look_left(t_cub3d *this, int keycode)
 			+ this->raycast->plane_y * cos(-this->raycast->rot_speed);
 }
 
-void	ft_walk_a(t_cub3d *this, int keycode)
-{
-	(void)keycode;
-	if (this->gameinfo->map[(int)(this->raycast->pos_y \
-	+ this->raycast->dir_x * this->raycast->move_speed)] \
-	[(int)(this->raycast->pos_x)] != '1')
-		this->raycast->pos_y += this->raycast->dir_x \
-		* this->raycast->move_speed;
-	if (this->gameinfo->map[(int)(this->raycast->pos_y)] \
-	[(int)(this->raycast->pos_x - this->raycast->dir_y \
-	* this->raycast->move_speed)] != '1')
-		this->raycast->pos_x \
-		-= this->raycast->dir_y * this->raycast->move_speed;
-}
-
-void	ft_walk_d(t_cub3d *this, int keycode)
-{
-	(void)keycode;
-	if (this->gameinfo->map[(int)(this->raycast->pos_y \
-	- this->raycast->dir_x * this->raycast->move_speed)] \
-	[(int)(this->raycast->pos_x)] != '1')
-		this->raycast->pos_y \
-		-= this->raycast->dir_x * this->raycast->move_speed;
-	if (this->gameinfo->map[(int)(this->raycast->pos_y)] \
-	[(int)(this->raycast->pos_x + this->raycast->dir_y \
-	* this->raycast->move_speed)] != '1')
-		this->raycast->pos_x \
-		+= this->raycast->dir_y * this->raycast->move_speed;
-}
-
 int	player_control(int keycode, t_cub3d *this)
 {
-	if (keycode == 0)
+	if (keycode == 97)
 		ft_walk_a(this, keycode);
-	if (keycode == 123)
+	if (keycode == 65361)
 		ft_look_right(this, keycode);
-	if (keycode == 124)
+	if (keycode == 65363)
 		ft_look_left(this, keycode);
-	if (keycode == 13)
+	if (keycode == 119)
 		ft_walk_w(this, keycode);
-	if (keycode == 1)
+	if (keycode == 115)
 		ft_walk_s(this, keycode);
-	if (keycode == 2)
+	if (keycode == 100)
 		ft_walk_d(this, keycode);
-	if (keycode == 53)
+	if (keycode == 65307)
 		ft_exit(this);
 	return (0);
 }

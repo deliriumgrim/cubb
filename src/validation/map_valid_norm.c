@@ -12,63 +12,38 @@
 
 #include "../../includes/cub3d.h"
 
-void	draw_clear(t_cub3d *this)
+size_t	search_max_len(char **map)
 {
-	int	x;
-	int	y;
+	int		i;
+	size_t	max_len;
 
-	y = 0;
-	while (y < 480)
+	i = 0;
+	max_len = 0;
+	while (map[i])
 	{
-		x = 0;
-		while (x < 640)
-		{
-			this->raycast->buff[y][x] = this->img_clear->addr[y * 640 + x];
-			x++;
-		}
-		y++;
+		if (max_len < ft_strlen(map[i]))
+			max_len = ft_strlen(map[i]);
+		i++;
 	}
+	return (max_len);
 }
 
-void	draw(t_cub3d *this)
+void	set_newline(char **map, size_t max_len)
 {
-	int	x;
-	int	y;
+	char	*f_join;
+	char	*f_free;
+	size_t	len;
 
-	y = 0;
-	while (y < 480)
+	len = ft_strlen(*map);
+	f_join = ft_strdup(*map);
+	f_free = f_join;
+	while (len < max_len)
 	{
-		x = 0;
-		while (x < 640)
-		{
-			this->img->addr[y * 640 + x] = this->raycast->buff[y][x];
-			x++;
-		}
-		y++;
+		f_join = ft_strjoin(f_join, " ");
+		free(f_free);
+		f_free = f_join;
+		len++;
 	}
-	mlx_put_image_to_window(this->mlx_info->mlx, \
-	this->mlx_info->mlx_win, this->img->img, 0, 0);
-	draw_clear(this);
-}
-
-void	put_floor_celling(t_cub3d *this)
-{
-	int	x;
-	int	y;
-	int	color;
-
-	color = this->gameinfo->color_c;
-	y = 0;
-	while (y < 480)
-	{
-		x = 0;
-		if (y > 240)
-			color = this->gameinfo->color_f;
-		while (x < 640)
-		{
-			my_mlx_pixel_put(this->img_clear, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	ft_realloc(map, f_join);
+	free(f_join);
 }
