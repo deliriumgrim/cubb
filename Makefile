@@ -29,7 +29,7 @@ LIB_PATH = libs/libft/
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -g3 -O2
+CFLAGS = -Wall -Wextra -Werror -g3
 
 MLX		=	-L libs/mlx -lmlx -framework OpenGL -framework AppKit
 

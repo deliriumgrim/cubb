@@ -1,34 +1,23 @@
-//
-// Created by Tile Tyuuki on 20.06.2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   esc_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tyuuki <tyuuki@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/18 13:42:13 by tyuuki            #+#    #+#             */
+/*   Updated: 2022/01/18 15:01:45 by tyuuki           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	cub3d_init(t_cub3d *this)
+void	ray_init(t_cub3d *this)
 {
-	this->gameinfo = (t_gameinfo *) malloc(sizeof(t_gameinfo));
-	this->mlx_info = (t_mlx *) malloc(sizeof(t_mlx));
-	this->img = (t_img *) malloc(sizeof(t_img));
-	this->img_clear = (t_img *) malloc(sizeof(t_img));
-	this->raycast = (t_raycast *) malloc(sizeof(t_raycast));
-	this->gameinfo->nb_players = 0;
-	this->gameinfo->size_texute = 64;
-	this->gameinfo->map = NULL;
-	this->gameinfo->game_settings = NULL;
-	this->mlx_info->path_EA = NULL;
-	this->mlx_info->path_WE = NULL;
-	this->mlx_info->path_NO = NULL;
-	this->mlx_info->path_SO = NULL;
-	this->mlx_info->path_F = NULL;
-	this->mlx_info->path_C = NULL;
-	this->mlx_info->mlx = NULL;
-	this->mlx_info->mlx_win = NULL;
-	this->mlx_info->EA_texture = NULL;
-	this->mlx_info->WE_texture = NULL;
-	this->mlx_info->NO_texture = NULL;
-	this->mlx_info->SO_texture = NULL;
-	int y = 0;
-	int x;
+	int	y;
+	int	x;
+
+	y = 0;
 	while (y < 480)
 	{
 		x = 0;
@@ -57,4 +46,30 @@ void	cub3d_init(t_cub3d *this)
 		}
 		y++;
 	}
+}
+
+void	cub3d_init(t_cub3d *this)
+{
+	this->gameinfo = (t_gameinfo *) malloc(sizeof(t_gameinfo));
+	this->mlx_info = (t_mlx *) malloc(sizeof(t_mlx));
+	this->img = (t_img *) malloc(sizeof(t_img));
+	this->img_clear = (t_img *) malloc(sizeof(t_img));
+	this->raycast = (t_raycast *) malloc(sizeof(t_raycast));
+	this->gameinfo->nb_players = 0;
+	this->gameinfo->size_texute = 64;
+	this->gameinfo->map = NULL;
+	this->gameinfo->game_settings = NULL;
+	this->mlx_info->path_ea = NULL;
+	this->mlx_info->path_we = NULL;
+	this->mlx_info->path_no = NULL;
+	this->mlx_info->path_so = NULL;
+	this->mlx_info->path_f = NULL;
+	this->mlx_info->path_c = NULL;
+	this->mlx_info->mlx = NULL;
+	this->mlx_info->mlx_win = NULL;
+	this->mlx_info->ea_texture = NULL;
+	this->mlx_info->we_texture = NULL;
+	this->mlx_info->no_texture = NULL;
+	this->mlx_info->so_texture = NULL;
+	ray_init(this);
 }

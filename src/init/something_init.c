@@ -1,6 +1,14 @@
-//
-// Created by Tile Tyuuki on 20.06.2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   esc_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tyuuki <tyuuki@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/18 13:42:13 by tyuuki            #+#    #+#             */
+/*   Updated: 2022/01/18 15:01:45 by tyuuki           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
@@ -11,10 +19,10 @@ void	write_map(t_cub3d *this, char *line, int fd)
 
 	s_join = line;
 	for_free = s_join;
-	while(1)
+	while (1)
 	{
 		line = get_next_line(fd);
-		if(!line)
+		if (!line)
 			break ;
 		s_join = ft_strjoin(s_join, line);
 		free(line);
@@ -56,13 +64,13 @@ void	check_conditions(char *line, t_cub3d *this, int *i)
 void	game_init_flag_one(t_cub3d *this, char *line, int fd)
 {
 	int	i;
+
 	i = 0;
 	this->gameinfo->game_settings = (char **)malloc(sizeof (char *) * 7);
-
-	while(1)
+	while (1)
 	{
 		line = get_next_line(fd);
-		if(!line)
+		if (!line)
 			break ;
 		check_conditions(line, this, &i);
 		free(line);
@@ -93,13 +101,13 @@ void	game_init_flag_two(t_cub3d *this, char *line, int fd)
 	write_map(this, line, fd);
 }
 
-int game_init(t_cub3d *this, char *file, int flag)
+int	game_init(t_cub3d *this, char *file, int flag)
 {
 	char	*line;
-	int 	fd;
+	int		fd;
 
 	fd = open(file, O_RDONLY);
-	if(fd == -1)
+	if (fd == -1)
 		ft_error(this, E_OF);
 	line = NULL;
 	if (flag == 1)

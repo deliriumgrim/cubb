@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   esc_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tyuuki <tyuuki@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/18 13:42:13 by tyuuki            #+#    #+#             */
+/*   Updated: 2022/01/18 15:01:45 by tyuuki           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -14,7 +26,7 @@
 
 /*init*/
 void	cub3d_init(t_cub3d *this);
-int 	game_init(t_cub3d *this, char *file, int flag);
+int		game_init(t_cub3d *this, char *file, int flag);
 void	write_params(t_cub3d *this);
 void	init_mlx(t_cub3d *this);
 
@@ -31,7 +43,7 @@ void	map_valid(t_cub3d *this);
 void	params_valid(t_cub3d *this);
 
 /*utils*/
-void 	ft_error(t_cub3d *this, char *message);
+void	ft_error(t_cub3d *this, char *message);
 void	check_filename(char *filename);
 void	ft_realloc(char **str, char *new_str);
 int		ft_isspace(char c);

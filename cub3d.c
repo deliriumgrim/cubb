@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   esc_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tyuuki <tyuuki@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/18 13:42:13 by tyuuki            #+#    #+#             */
+/*   Updated: 2022/01/18 15:01:45 by tyuuki           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cub3d.h"
 
-void draw(t_cub3d *this)
+void	draw(t_cub3d *this)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
+
 	y = 0;
 	while (y < 480)
 	{
@@ -15,12 +28,13 @@ void draw(t_cub3d *this)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(this->mlx_info->mlx, this->mlx_info->mlx_win, this->img->img, 0, 0);
+	mlx_put_image_to_window(this->mlx_info->mlx, \
+	this->mlx_info->mlx_win, this->img->img, 0, 0);
 	y = 0;
-	while(y < 480)
+	while (y < 480)
 	{
 		x = 0;
-		while(x < 640)
+		while (x < 640)
 		{
 			this->raycast->buff[y][x] = this->img_clear->addr[y * 640 + x];
 			x++;
@@ -29,118 +43,146 @@ void draw(t_cub3d *this)
 	}
 }
 
-int raycast(t_cub3d *this)
+int	raycast(t_cub3d *this)
 {
-	int x;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < this->raycast->width)
 	{
-		this->raycast->cameraX = 2 * x
-				/ (double)this->raycast->width - 1;
-		this->raycast->rayDirX = this->raycast->dirX
-				+ this->raycast->planeX * this->raycast->cameraX;
-		this->raycast->rayDirY = this->raycast->dirY
-				+ this->raycast->planeY * this->raycast->cameraX;
-		this->raycast->mapX = (int)this->raycast->posX;
-		this->raycast->mapY = (int)this->raycast->posY;
-		this->raycast->deltaDistX = fabs(1 / this->raycast->rayDirX);
-		this->raycast->deltaDistY = fabs(1 / this->raycast->rayDirY);
-		//this
-		if (this->raycast->rayDirX < 0)
+		this->raycast->camera_x = 2 * x \
+		(double)this->raycast->width - 1;
+		this->raycast->ray_dir_x = this->raycast->dir_x \
+		+ this->raycast->plane_x * this->raycast->camera_x;
+		this->raycast->ray_dir_y = this->raycast->dir_y \
+		+ this->raycast->plane_y * this->raycast->camera_x;
+		this->raycast->map_x = (int)this->raycast->pos_x;
+		this->raycast->map_y = (int)this->raycast->pos_y;
+		this->raycast->delta_dist_x = fabs(1 / this->raycast->ray_dir_x);
+		this->raycast->delta_dist_y = fabs(1 / this->raycast->ray_dir_y);
+		if (this->raycast->ray_dir_x < 0)
 		{
-			this->raycast->stepX = -1;
-			this->raycast->sideDistX = (this->raycast->posX - this->raycast->mapX)
-					* this->raycast->deltaDistX;
+			this->raycast->step_x = -1;
+			this->raycast->side_dist_x \
+			= (this->raycast->pos_x - this->raycast->map_x)
+					* this->raycast->delta_dist_x;
 		}
 		else
 		{
-			this->raycast->stepX = 1;
-			this->raycast->sideDistX = (this->raycast->mapX + 1.0 - this->raycast->posX)
-					* this->raycast->deltaDistX;
+			this->raycast->step_x = 1;
+			this->raycast->side_dist_x \
+			= (this->raycast->map_x + 1.0 - this->raycast->pos_x)
+					* this->raycast->delta_dist_x;
 		}
-		if (this->raycast->rayDirY < 0)
+		if (this->raycast->ray_dir_y < 0)
 		{
-			this->raycast->stepY = -1;
-			this->raycast->sideDistY = (this->raycast->posY - this->raycast->mapY)
-									   * this->raycast->deltaDistY;
+			this->raycast->step_y = -1;
+			this->raycast->side_dist_y \
+			= (this->raycast->pos_y - this->raycast->map_y) \
+			* this->raycast->delta_dist_y;
 		}
 		else
 		{
-			this->raycast->stepY = 1;
-			this->raycast->sideDistY = (this->raycast->mapY + 1.0 - this->raycast->posY)
-									   * this->raycast->deltaDistY;
+			this->raycast->step_y = 1;
+			this->raycast->side_dist_y \
+			= (this->raycast->map_y + 1.0 - this->raycast->pos_y) \
+			* this->raycast->delta_dist_y;
 		}
 		this->raycast->hit = 0;
 		while (this->raycast->hit == 0)
 		{
-			if (this->raycast->sideDistX < this->raycast->sideDistY)
+			if (this->raycast->side_dist_x < this->raycast->side_dist_y)
 			{
-				this->raycast->sideDistX += this->raycast->deltaDistX;
-				this->raycast->mapX += this->raycast->stepX;
+				this->raycast->side_dist_x += this->raycast->delta_dist_x;
+				this->raycast->map_x += this->raycast->step_x;
 				this->raycast->side = 0;
 			}
 			else
 			{
-				this->raycast->sideDistY += this->raycast->deltaDistY;
-				this->raycast->mapY += this->raycast->stepY;
+				this->raycast->side_dist_y += this->raycast->delta_dist_y;
+				this->raycast->map_y += this->raycast->step_y;
 				this->raycast->side = 1;
 			}
-			if (this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != '0'
-			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'N'
-			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'W'
-			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'E'
-			&& this->gameinfo->map[this->raycast->mapY][this->raycast->mapX] != 'S')
+			if (this->gameinfo->map[this->raycast->map_y] \
+			[this->raycast->map_x] != '0' \
+			&& this->gameinfo->map[this->raycast->map_y] \
+			[this->raycast->map_x] != 'N' \
+			&& this->gameinfo->map[this->raycast->map_y] \
+			[this->raycast->map_x] != 'W' \
+			&& this->gameinfo->map[this->raycast->map_y] \
+			[this->raycast->map_x] != 'E' \
+			&& this->gameinfo->map[this->raycast->map_y] \
+			[this->raycast->map_x] != 'S')
 				this->raycast->hit = 1;
 		}
 		if (this->raycast->side == 0)
-			this->raycast->perpWallDist = (this->raycast->mapX - this->raycast->posX
-					+ (1 - this->raycast->stepX)/2)/this->raycast->rayDirX;
+			this->raycast->perp_wall_dist \
+			= (this->raycast->map_x - this->raycast->pos_x \
+			+ (1 - this->raycast->step_x) / 2) / this->raycast->ray_dir_x;
 		else
-			this->raycast->perpWallDist = (this->raycast->mapY - this->raycast->posY
-					+ (1 - this->raycast->stepY)/2)/this->raycast->rayDirY;
-		this->raycast->lineHeight = (int)(this->raycast->height / this->raycast->perpWallDist);
-		this->raycast->drawStart = -this->raycast->lineHeight / 2 + this->raycast->height / 2;
-		if (this->raycast->drawStart < 0)
-			this->raycast->drawStart = 0;
-		this->raycast->drawEnd = this->raycast->lineHeight / 2 + this->raycast->height / 2;
-		if (this->raycast->drawEnd >= this->raycast->height)
-			this->raycast->drawEnd = this->raycast->height - 1;
-		this->raycast->texNum = this->gameinfo->map[this->raycast->mapY][this->raycast->mapX];
+			this->raycast->perp_wall_dist \
+			= (this->raycast->map_y - this->raycast->pos_y \
+			+ (1 - this->raycast->step_y) / 2) / this->raycast->ray_dir_y;
+		this->raycast->line_height \
+		= (int)(this->raycast->height / this->raycast->perp_wall_dist);
+		this->raycast->draw_start \
+		= -this->raycast->line_height / 2 + this->raycast->height / 2;
+		if (this->raycast->draw_start < 0)
+			this->raycast->draw_start = 0;
+		this->raycast->draw_end \
+		= this->raycast->line_height / 2 + this->raycast->height / 2;
+		if (this->raycast->draw_end >= this->raycast->height)
+			this->raycast->draw_end = this->raycast->height - 1;
+		this->raycast->tex_num \
+		= this->gameinfo->map[this->raycast->map_y][this->raycast->map_x];
 		if (this->raycast->side == 0)
-			this->raycast->wallX = this->raycast->posY + this->raycast->perpWallDist
-					*this->raycast->rayDirY;
+			this->raycast->wall_x \
+			= this->raycast->pos_y + this->raycast->perp_wall_dist \
+			* this->raycast->ray_dir_y;
 		else
-			this->raycast->wallX = this->raycast->posX + this->raycast->perpWallDist
-					*this->raycast->rayDirX;
-		this->raycast->wallX -= floor(this->raycast->wallX);
-		this->raycast->texX = (int)(this->raycast->wallX * (double)64);
-		if (this->raycast->side == 0 && this->raycast->rayDirX > 0)
-			this->raycast->texX = 64 - this->raycast->texX - 1;
-		if (this->raycast->side == 1 && this->raycast->rayDirY < 0)
-			this->raycast->texX = 64 - this->raycast->texX - 1;
-		this->raycast->step = 1.0 * 64 / this->raycast->lineHeight;
-		this->raycast->texPos = (this->raycast->drawStart - 480 / 2 + this->raycast->lineHeight / 2)
-				* this->raycast->step;
-		if ((this->raycast->rayDirX < 0 && this->raycast->rayDirY <0 && this->raycast->side == 1)
-			|| (this->raycast->rayDirX > 0 && this->raycast->rayDirY <0 && this->raycast->side == 1))
-			this->raycast->texNum = 0;
-		if ((this->raycast->rayDirX < 0 && this->raycast->rayDirY >0 && this->raycast->side == 1)
-			|| (this->raycast->rayDirX > 0 && this->raycast->rayDirY > 0 && this->raycast->side == 1))
-			this->raycast->texNum = 1;
-		if ((this->raycast->rayDirX < 0 && this->raycast->rayDirY >0 && this->raycast->side == 0)
-			|| (this->raycast->rayDirX < 0 && this->raycast->rayDirY < 0 && this->raycast->side == 0))
-			this->raycast->texNum = 2;
-		int y;
-		y = this->raycast->drawStart;
-		while (y < this->raycast->drawEnd)
+			this->raycast->wall_x \
+			= this->raycast->pos_x + this->raycast->perp_wall_dist \
+			* this->raycast->ray_dir_x;
+		this->raycast->wall_x -= floor(this->raycast->wall_x);
+		this->raycast->tex_x = (int)(this->raycast->wall_x * (double)64);
+		if (this->raycast->side == 0 && this->raycast->ray_dir_x > 0)
+			this->raycast->tex_x = 64 - this->raycast->tex_x - 1;
+		if (this->raycast->side == 1 && this->raycast->ray_dir_y < 0)
+			this->raycast->tex_x = 64 - this->raycast->tex_x - 1;
+		this->raycast->step = 1.0 * 64 / this->raycast->line_height;
+		this->raycast->tex_pos \
+		= (this->raycast->draw_start - 480 / 2 \
+		+ this->raycast->line_height / 2) \
+		* this->raycast->step;
+		if ((this->raycast->ray_dir_x < 0 \
+			&& this->raycast->ray_dir_y < 0 \
+			&& this->raycast->side == 1)
+			|| (this->raycast->ray_dir_x > 0 && this->raycast->ray_dir_y < 0 \
+			&& this->raycast->side == 1))
+			this->raycast->tex_num = 0;
+		if ((this->raycast->ray_dir_x < 0 && this->raycast->ray_dir_y > 0 \
+		&& this->raycast->side == 1)
+			|| (this->raycast->ray_dir_x > 0 \
+			&& this->raycast->ray_dir_y > 0 \
+			&& this->raycast->side == 1))
+			this->raycast->tex_num = 1;
+		if ((this->raycast->ray_dir_x < 0 && this->raycast->ray_dir_y > 0 \
+		&& this->raycast->side == 0)
+			|| (this->raycast->ray_dir_x < 0 && this->raycast->ray_dir_y < 0 \
+			&& this->raycast->side == 0))
+			this->raycast->tex_num = 2;
+		y = this->raycast->draw_start;
+		while (y < this->raycast->draw_end)
 		{
-			this->raycast->texY = (int)this->raycast->texPos & (64 - 1);
-			this->raycast->texPos += this->raycast->step;
-			if (this->raycast->texNum == 49)
-				this->raycast->texNum = 3;
-			this->raycast->color = this->raycast->texture[this->raycast->texNum][this->raycast->texY * 64 + this->raycast->texX];
-			this->raycast->buff[y][x]=this->raycast->color;
+			this->raycast->tex_y = (int)this->raycast->tex_pos & (64 - 1);
+			this->raycast->tex_pos += this->raycast->step;
+			if (this->raycast->tex_num == 49)
+				this->raycast->tex_num = 3;
+			this->raycast->color \
+			= this->raycast->texture[this->raycast->tex_num] \
+			[this->raycast->tex_y * 64 + this->raycast->tex_x];
+			this->raycast->buff[y][x] = this->raycast->color;
 			y++;
 		}
 		x++;
@@ -148,7 +190,7 @@ int raycast(t_cub3d *this)
 	return (0);
 }
 
-int loop(t_cub3d *this)
+int	loop(t_cub3d *this)
 {
 	raycast(this);
 	draw(this);
@@ -159,50 +201,50 @@ void	write_dir_info(t_cub3d *this)
 {
 	if (this->gameinfo->dir_player == 1)
 	{
-		this->raycast->dirX = 0.01;
-		this->raycast->dirY = 0.999;
-		this->raycast->planeX = 0.659;
-		this->raycast->planeY = -0.006;
+		this->raycast->dir_x = 0.01;
+		this->raycast->dir_y = 0.999;
+		this->raycast->plane_x = 0.659;
+		this->raycast->plane_y = -0.006;
 	}
 	else if (this->gameinfo->dir_player == 2)
 	{
-		this->raycast->dirX = 1;
-		this->raycast->dirY = 0;
-		this->raycast->planeX = 0;
-		this->raycast->planeY = -0.66;
+		this->raycast->dir_x = 1;
+		this->raycast->dir_y = 0;
+		this->raycast->plane_x = 0;
+		this->raycast->plane_y = -0.66;
 	}
 	else if (this->gameinfo->dir_player == 3)
 	{
-		this->raycast->dirX = -0.01;
-		this->raycast->dirY = -0.999;
-		this->raycast->planeX = -0.659;
-		this->raycast->planeY = 0.006;
+		this->raycast->dir_x = -0.01;
+		this->raycast->dir_y = -0.999;
+		this->raycast->plane_x = -0.659;
+		this->raycast->plane_y = 0.006;
 	}
 	else if (this->gameinfo->dir_player == 4)
 	{
-		this->raycast->dirX = -0.999;
-		this->raycast->dirY = 0.01;
-		this->raycast->planeX = 0.006;
-		this->raycast->planeY = 0.659;
+		this->raycast->dir_x = -0.999;
+		this->raycast->dir_y = 0.01;
+		this->raycast->plane_x = 0.006;
+		this->raycast->plane_y = 0.659;
 	}
 }
 
-void write_info(t_cub3d *this)
+void	write_info(t_cub3d *this)
 {
-	this->raycast->posX = this->gameinfo->x_pos + 0.5;
-	this->raycast->posY = this->gameinfo->y_pos + 0.5;
+	this->raycast->pos_x = this->gameinfo->x_pos + 0.5;
+	this->raycast->pos_y = this->gameinfo->y_pos + 0.5;
 	this->raycast->width = 640;
 	this->raycast->height = 480;
 	write_dir_info(this);
-	this->raycast->moveSpeed = 0.05;
-	this->raycast->rotSpeed = 0.05;
+	this->raycast->move_speed = 0.05;
+	this->raycast->rot_speed = 0.05;
 }
 
 void	put_floor_celling(t_cub3d *this)
 {
-	int x;
-	int y;
-	int color;
+	int	x;
+	int	y;
+	int	color;
 
 	color = this->gameinfo->color_c;
 	y = 0;
@@ -220,11 +262,11 @@ void	put_floor_celling(t_cub3d *this)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_cub3d this;
+	t_cub3d	this;
 
-	if(argc != 2)
+	if (argc != 2)
 		return (1);
 	cub3d_init(&this);
 	check_filename(argv[1]);

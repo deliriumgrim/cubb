@@ -1,6 +1,14 @@
-//
-// Created by Tile Tyuuki on 21.06.2022.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   esc_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tyuuki <tyuuki@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/18 13:42:13 by tyuuki            #+#    #+#             */
+/*   Updated: 2022/01/18 15:01:45 by tyuuki           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
@@ -23,7 +31,7 @@ void	set_flags(t_cub3d *this, int i, int **flag)
 void	params_valid(t_cub3d *this)
 {
 	int	i;
-	int j;
+	int	j;
 	int	*flag;
 
 	j = 0;
